@@ -32,6 +32,13 @@ body {
     justify-content: center;
     align-items: center;
     z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+#orientation-message.visible {
+    opacity: 1;
+    display: flex;
 }
 
 .orientation-content {
@@ -43,6 +50,12 @@ body {
     font-size: 48px;
     margin-bottom: 20px;
     animation: rotate 2s infinite;
+}
+
+.hint {
+    font-size: 0.9em;
+    color: var(--text-muted);
+    margin-top: 10px;
 }
 
 /* Page d'accueil */
@@ -218,14 +231,16 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    padding: 50px;
+    width: calc(100% - 40px);
+    height: calc(100% - 40px);
+    margin: 20px;
+    padding: 30px;
     display: none;
     flex-direction: column;
     opacity: 0;
     transform: translateX(100%) scale(0.95);
     transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: top left;
 }
 
 .section.active {
@@ -243,7 +258,7 @@ body {
 
 .section-content {
     flex: 1;
-    overflow-y: auto;
+    position: relative;
     padding-right: 20px;
 }
 
@@ -628,7 +643,7 @@ body {
     }
 
     .section {
-        padding: 30px;
+        padding: 20px;
     }
 
     .feature-grid,
