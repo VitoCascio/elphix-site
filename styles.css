@@ -13,11 +13,29 @@
     --text-muted: #CCCCCC;
 }
 
-body {
-    font-family: 'Poppins', sans-serif;
+html, body {
+    height: 100vh;
+    width: 100vw;
     overflow: hidden;
-    background: var(--bg-dark);
+    background-color: var(--bg-dark);
+    font-family: 'Poppins', sans-serif;
     color: var(--text-light);
+}
+
+#app {
+    height: 100vh;
+    width: 100vw;
+}
+
+.container {
+    width: 1440px;
+    height: 900px;
+    transform: scale(var(--scale));
+    transform-origin: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
 }
 
 /* Message d'orientation */
@@ -32,13 +50,6 @@ body {
     justify-content: center;
     align-items: center;
     z-index: 1000;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-}
-
-#orientation-message.visible {
-    opacity: 1;
-    display: flex;
 }
 
 .orientation-content {
@@ -52,15 +63,9 @@ body {
     animation: rotate 2s infinite;
 }
 
-.hint {
-    font-size: 0.9em;
-    color: var(--text-muted);
-    margin-top: 10px;
-}
-
 /* Page d'accueil */
 #landing {
-    height: 100vh;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -157,18 +162,19 @@ body {
 
 /* Menu latéral */
 #side-menu {
-    position: fixed;
+    position: absolute;
     left: 0;
     top: 0;
     width: 250px;
-    height: 100vh;
+    height: 100%;
     background: rgba(28,31,38,0.95);
     padding: 20px;
-    box-shadow: 2px 0 20px rgba(0,0,0,0.3);
     transform: translateX(-100%);
     transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     backdrop-filter: blur(10px);
     z-index: 100;
+    box-shadow: 2px 0 20px rgba(0,0,0,0.3);
+    clip-path: inset(0 -20px 0 0);
 }
 
 #side-menu.visible {
@@ -200,7 +206,7 @@ body {
 
 /* Bouton plein écran */
 .fullscreen-button {
-    position: fixed;
+    position: absolute;
     top: 20px;
     right: 20px;
     background: none;
@@ -221,7 +227,7 @@ body {
 /* Contenu principal */
 #main-content {
     margin-left: 250px;
-    height: 100vh;
+    height: 100%;
     position: relative;
     background: var(--bg-dark);
     overflow: hidden;
@@ -231,16 +237,14 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    width: calc(100% - 40px);
-    height: calc(100% - 40px);
-    margin: 20px;
-    padding: 30px;
+    width: 100%;
+    height: 100%;
+    padding: 50px;
     display: none;
     flex-direction: column;
     opacity: 0;
     transform: translateX(100%) scale(0.95);
     transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-    transform-origin: top left;
 }
 
 .section.active {
@@ -258,7 +262,7 @@ body {
 
 .section-content {
     flex: 1;
-    position: relative;
+    overflow: hidden;
     padding-right: 20px;
 }
 
@@ -514,13 +518,11 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px;
 }
 
 .qr-code img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+    width: 260px;
+    height: 260px;
 }
 
 .secondary-button {
@@ -626,53 +628,39 @@ body {
     display: none;
 }
 
-/* Media Queries */
-@media (max-width: 1200px) {
-    .use-cases {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
+/* Adaptation responsive */
 @media (max-width: 768px) {
-    #side-menu {
-        width: 200px;
-    }
-
-    #main-content {
-        margin-left: 200px;
-    }
-
-    .section {
-        padding: 20px;
-    }
-
-    .feature-grid,
-    .advantages-grid,
-    .content-columns,
-    .contact-container,
-    .use-cases {
-        grid-template-columns: 1fr;
-    }
-
     .logo-img {
-        width: 300px;
-    }
-
-    #side-menu .logo-img {
-        width: 150px;
+        width: 60%;
     }
 
     .tagline {
-        font-size: 2em;
+        font-size: 1.8rem;
     }
 
-    .vcard-container {
-        flex-direction: column;
-        gap: 30px;
+    .lead {
+        font-size: 1rem;
+    }
+}
+
+/* Message d'orientation sur mobile */
+@media screen and (orientation: portrait) {
+    body::before {
+        content: "Veuillez tourner l'écran pour une meilleure expérience (mode paysage).";
+        position: fixed;
+        inset: 0;
+        background-color: black;
+        color: white;
+        font-size: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        text-align: center;
+        padding: 20px;
     }
 
-    .qr-code {
-        width: 250px;
-        height: 250px;
+    .container {
+        display: none;
     }
 }

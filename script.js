@@ -12,45 +12,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // Liste ordonnée des sections
     const sections = ['section1', 'section2', 'section3', 'section4', 'section5', 'section6', 'section7'];
 
-    // Fonction pour ajuster l'échelle d'une section
-    function adjustSectionScale(section) {
-        if (!section) return;
-
-        // Réinitialiser l'échelle
-        section.style.transform = 'scale(1)';
-        
-        // Obtenir les dimensions
-        const viewportHeight = window.innerHeight;
-        const viewportWidth = window.innerWidth - 250; // Soustraire la largeur du menu
-        const sectionRect = section.getBoundingClientRect();
-        
-        // Calculer les ratios
-        const scaleX = viewportWidth / sectionRect.width;
-        const scaleY = viewportHeight / sectionRect.height;
-        
-        // Utiliser le plus petit ratio pour maintenir les proportions
-        const scale = Math.min(scaleX, scaleY, 1);
-        
-        // Appliquer l'échelle si nécessaire
-        if (scale < 1) {
-            section.style.transform = `scale(${scale})`;
-            section.style.transformOrigin = 'top left';
-        }
+    // Fonction de redimensionnement
+    function updateScale() {
+        const baseWidth = 1440;
+        const baseHeight = 900;
+        const scaleX = window.innerWidth / baseWidth;
+        const scaleY = window.innerHeight / baseHeight;
+        const scale = Math.min(scaleX, scaleY);
+        document.documentElement.style.setProperty('--scale', scale);
     }
 
-    // Observer les changements de taille de la fenêtre
-    const resizeObserver = new ResizeObserver(entries => {
-        for (const entry of entries) {
-            if (entry.target.classList.contains('active')) {
-                adjustSectionScale(entry.target);
-            }
-        }
-    });
-
-    // Observer toutes les sections
-    document.querySelectorAll('.section').forEach(section => {
-        resizeObserver.observe(section);
-    });
+    // Appliquer le redimensionnement initial et sur chaque changement de taille
+    window.addEventListener('resize', updateScale);
+    window.addEventListener('load', updateScale);
 
     // Détection mobile
     function isMobileDevice() {
@@ -82,14 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    window.addEventListener('resize', () => {
-        checkOrientation();
-        if (currentSection) {
-            const currentElement = document.getElementById(currentSection);
-            adjustSectionScale(currentElement);
-        }
-    });
-    
+    window.addEventListener('resize', checkOrientation);
     window.addEventListener('orientationchange', checkOrientation);
     checkOrientation();
 
@@ -255,7 +222,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     nextElement.style.opacity = '1';
                     nextElement.style.transform = 'translateX(0) scale(1)';
                     animateSectionContent(nextElement);
-                    adjustSectionScale(nextElement);
                 });
             }, 800);
         } else {
@@ -272,7 +238,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 nextElement.style.opacity = '1';
                 nextElement.style.transform = 'translateX(0) scale(1)';
                 animateSectionContent(nextElement);
-                adjustSectionScale(nextElement);
             });
         }
 
