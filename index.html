@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
 </head>
 <body>
     <!-- Écran d'orientation mobile -->
@@ -270,8 +271,8 @@
             <div class="section-content">
                 <div class="vcard-container">
                     <div class="qr-code-wrapper">
-                        <canvas id="qrCode" class="qr-code"></canvas>
-                        <button class="secondary-button">
+                        <div id="qrCode" class="qr-code"></div>
+                        <button id="downloadVCard" class="secondary-button">
                             <span class="icon">📱</span>
                             Ajouter à vos contacts
                         </button>

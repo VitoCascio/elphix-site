@@ -287,37 +287,47 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // QR Code generation
-    const qrCode = document.getElementById('qrCode');
-    if (qrCode) {
-        const vCardData = `BEGIN:VCARD
+    // Configuration vCard
+    const vCardData = `BEGIN:VCARD
 VERSION:3.0
 N:Marcheix;Thomas;;;
 FN:Thomas Marcheix
 ORG:Elphix
-TEL:0616921697
+TITLE:Consultant en communication digitale
+TEL;TYPE=CELL:0616921697
 EMAIL:contact@elphix.com
 URL:https://elphix.com
-URL;type=LinkedIn:https://www.linkedin.com/in/thomas-marcheix/
+URL;TYPE=LinkedIn:https://www.linkedin.com/in/thomas-marcheix/
 END:VCARD`;
-        
-        import('qrcode').then((QRCode) => {
-            QRCode.toCanvas(qrCode, vCardData, {
-                width: 300,
-                margin: 2,
-                color: {
-                    dark: '#1C1F26',
-                    light: '#FFFFFF'
-                }
-            });
-        });
 
-        // Handle "Add to contacts" button click
-        const addToContactsBtn = qrCode.nextElementSibling;
-        if (addToContactsBtn) {
-            addToContactsBtn.addEventListener('click', () => {
-                window.location.href = `data:text/vcard;charset=utf-8,${encodeURIComponent(vCardData)}`;
+    // Attendre que le DOM soit chargé pour générer le QR Code
+    window.addEventListener('load', () => {
+        const qrCodeElement = document.getElementById('qrCode');
+        if (qrCodeElement && window.QRCode) {
+            new QRCode(qrCodeElement, {
+                text: vCardData,
+                width: 300,
+                height: 300,
+                colorDark: '#1C1F26',
+                colorLight: '#FFFFFF',
+                correctLevel: QRCode.CorrectLevel.H
             });
+
+            // Gestion du téléchargement de la vCard
+            const downloadButton = document.getElementById('downloadVCard');
+            if (downloadButton) {
+                downloadButton.addEventListener('click', () => {
+                    const blob = new Blob([vCardData], { type: 'text/vcard' });
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'thomas-marcheix.vcf';
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    document.body.removeChild(a);
+                });
+            }
         }
-    }
+    });
 });
