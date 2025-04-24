@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-book Interactif - Elphix Agency</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Écran d'orientation mobile -->
+        <div id="orientation-message" class="hidden">
+            <div class="orientation-content">
+                <div class="phone-icon">📱</div>
+                <p>Pour une expérience optimale, veuillez tourner votre appareil en mode paysage.</p>
+                <p class="hint">Activez la rotation automatique de votre écran si nécessaire.</p>
+            </div>
+        </div>
+
+        <!-- Page d'accueil -->
+        <section id="landing">
+            <div class="landing-content">
+                <div class="logo">
+                    <img src="https://i.ibb.co/9mncJxQ1/logo-elphix.png" alt="Elphix Agency" class="logo-img">
+                </div>
+                <h1 class="tagline">Et si votre communication devenait aussi simple et puissante qu'une seule page ?</h1>
+                <button id="enter-button" class="cta-button">Découvrir</button>
+            </div>
+            <div class="glow-effect"></div>
+        </section>
+
+        <!-- Menu latéral -->
+        <nav id="side-menu" class="hidden">
+            <div class="logo">
+                <img src="https://i.ibb.co/9mncJxQ1/logo-elphix.png" alt="Elphix Agency" class="logo-img">
+                <p class="sidebar-description">🧠 Ce que vous voyez ici, ce n'est pas un site...<br>C'est un <strong>e-book interactif</strong> conçu pour vous présenter, convaincre, et convertir.</p>
+            </div>
+            <ul>
+                <li><a href="#section1" class="menu-item">À quoi sert un e-book interactif ?</a></li>
+                <li><a href="#section2" class="menu-item">Mieux qu'un site classique</a></li>
+                <li><a href="#section3" class="menu-item">Les 6 visages</a></li>
+                <li><a href="#section4" class="menu-item">Pourquoi ça fonctionne ?</a></li>
+                <li><a href="#section5" class="menu-item">Exemples concrets</a></li>
+                <li><a href="#section6" class="menu-item">Et si c'était le vôtre ?</a></li>
+                <li><a href="#section7" class="menu-item">Ma carte de visite digitale</a></li>
+            </ul>
+        </nav>
+
+        <!-- Bouton plein écran -->
+        <button id="fullscreen-button" class="fullscreen-button hidden">⛶</button>
+
+        <!-- Contenu principal -->
+        <main id="main-content" class="hidden">
+            <section id="section1" class="section">
+                <h2>À quoi sert un e-book interactif ?</h2>
+                <div class="section-content">
+                    <p class="lead">Un outil, plusieurs usages. Une seule logique : vous faire briller.</p>
+                    <div class="feature-grid">
+                        <div class="feature-item">
+                            <span class="icon">📤</span>
+                            <h3>Qu'on peut partager</h3>
+                            <p>Envoyez, diffusez, partagez facilement</p>
+                        </div>
+                        <div class="feature-item">
+                            <span class="icon">👀</span>
+                            <h3>Qu'on peut montrer</h3>
+                            <p>En réunion, en rendez-vous, en ligne</p>
+                        </div>
+                        <div class="feature-item">
+                            <span class="icon">🔄</span>
+                            <h3>Qu'on peut faire vivre</h3>
+                            <p>Mettez à jour, adaptez, optimisez</p>
+                        </div>
+                        <div class="feature-item">
+                            <span class="icon">💬</span>
+                            <h3>Qui parle pour vous</h3>
+                            <p>24h/24, 7j/7, sans effort</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="section2" class="section">
+                <h2>Mieux qu'un site. Mieux qu'un PowerPoint. Mieux qu'un flyer.</h2>
+                <div class="section-content">
+                    <div class="advantages-grid">
+                        <div class="advantage-item">
+                            <span class="icon">🌐</span>
+                            <h3>Un site, c'est souvent figé</h3>
+                            <p>Et pensé uniquement pour le web</p>
+                        </div>
+                        <div class="advantage-item">
+                            <span class="icon">💻</span>
+                            <h3>Un PowerPoint demande votre présence</h3>
+                            <p>Il faut être là pour expliquer</p>
+                        </div>
+                        <div class="advantage-item">
+                            <span class="icon">📄</span>
+                            <h3>Un flyer finit à la poubelle</h3>
+                            <p>Sans impact, sans suivi possible</p>
+                        </div>
+                        <div class="advantage-item">
+                            <span class="icon">✨</span>
+                            <h3>L'e-book fait tout, tout seul</h3>
+                            <p>Il présente, prospecte et démontre votre valeur</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="section3" class="section">
+                <h2>1 outil. 6 super-pouvoirs.</h2>
+                <div class="section-content">
+                    <div class="content-columns">
+                        <div class="content-column">
+                            <div class="content-item">
+                                <span class="icon">🌐</span>
+                                <h4>Mini site web</h4>
+                                <p>À consulter sur PC, mobile ou tablette</p>
+                            </div>
+                            <div class="content-item">
+                                <span class="icon">🎞</span>
+                                <h4>Présentation dynamique</h4>
+                                <p>À projeter en rdv ou réunion</p>
+                            </div>
+                            <div class="content-item">
+                                <span class="icon">📇</span>
+                                <h4>Carte de visite digitale</h4>
+                                <p>Avec lien cliquable ou QR Code à scanner</p>
+                            </div>
+                        </div>
+                        <div class="content-column">
+                            <div class="content-item">
+                                <span class="icon">✉️</span>
+                                <h4>Outil de prospection</h4>
+                                <p>À envoyer par email, WhatsApp ou LinkedIn</p>
+                            </div>
+                            <div class="content-item">
+                                <span class="icon">🧠</span>
+                                <h4>Support pédagogique</h4>
+                                <p>Pour mieux expliquer votre métier, vos offres</p>
+                            </div>
+                            <div class="content-item">
+                                <span class="icon">❤️</span>
+                                <h4>Contenu partageable</h4>
+                                <p>Pensé pour les réseaux et les interactions</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="section4" class="section">
+                <h2>Pourquoi ça fonctionne ?</h2>
+                <div class="section-content">
+                    <p class="lead">Parce que c'est beau, clair, et ça donne envie.</p>
+                    <div class="use-cases">
+                        <div class="case">
+                            <span class="icon">✅</span>
+                            <h3>Tout est interactif</h3>
+                            <p>Chaque élément réagit et s'anime naturellement</p>
+                        </div>
+                        <div class="case">
+                            <span class="icon">✅</span>
+                            <h3>Tout est lisible rapidement</h3>
+                            <p>L'information est claire et bien structurée</p>
+                        </div>
+                        <div class="case">
+                            <span class="icon">✅</span>
+                            <h3>Le message est contrôlé</h3>
+                            <p>Vous maîtrisez l'image et le discours</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="section5" class="section">
+                <h2>Des exemples concrets</h2>
+                <div class="section-content">
+                    <div class="use-cases">
+                        <div class="case">
+                            <span class="icon">🍽️</span>
+                            <h3>Restaurateur</h3>
+                            <p class="case-description">Présentez votre restaurant, votre carte et vos spécialités avec des photos alléchantes</p>
+                            <p class="case-features">Réservation de table en ligne, menu du jour actualisé, événements spéciaux</p>
+                            <p class="case-impact">Vos clients commandent et réservent même sans site web, directement depuis leur mobile</p>
+                        </div>
+                        <div class="case">
+                            <span class="icon">🔧</span>
+                            <h3>Plombier</h3>
+                            <p class="case-description">Montrez vos interventions, tarifs et zone géographique en toute transparence</p>
+                            <p class="case-features">Devis rapides, galerie de réalisations, disponibilités en temps réel</p>
+                            <p class="case-impact">Décrochez des chantiers sans passer par les plateformes qui prennent des commissions</p>
+                        </div>
+                        <div class="case">
+                            <span class="icon">💪</span>
+                            <h3>Coach sportif</h3>
+                            <p class="case-description">Exposez vos programmes, témoignages clients et résultats avant/après</p>
+                            <p class="case-features">Réservation de séances, forfaits personnalisés, suivi des progrès</p>
+                            <p class="case-impact">Convertissez des prospects en clients sans avoir besoin d'être sur tous les réseaux</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="section6" class="section">
+                <h2>Et si c'était le vôtre ?</h2>
+                <div class="section-content">
+                    <div class="contact-container">
+                        <div class="contact-form-container">
+                            <form class="contact-form">
+                                <div class="form-group">
+                                    <input type="text" placeholder="Nom" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" placeholder="Email" required>
+                                </div>
+                                <div class="form-group">
+                                    <textarea placeholder="Message" required></textarea>
+                                </div>
+                                <button type="submit" class="submit-button">Demander mon propre e-book</button>
+                            </form>
+                        </div>
+                        <div class="contact-info">
+                            <h3>Vous avez tout à y gagner</h3>
+                            <ul class="contact-benefits">
+                                <li>
+                                    <span class="icon">👀</span>
+                                    <p>Visibilité</p>
+                                </li>
+                                <li>
+                                    <span class="icon">🎯</span>
+                                    <p>Crédibilité</p>
+                                </li>
+                                <li>
+                                    <span class="icon">💎</span>
+                                    <p>Clients</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="section7" class="section">
+                <h2>Ma carte de visite digitale</h2>
+                <div class="section-content">
+                    <div class="vcard-container">
+                        <div class="qr-code-wrapper">
+                            <div id="qrCode" class="qr-code"></div>
+                            <button id="downloadVCard" class="secondary-button">
+                                <span class="icon">📱</span>
+                                Ajouter à vos contacts
+                            </button>
+                        </div>
+                        <div class="vcard-text">
+                            <p class="lead">Un simple scan suffit pour avoir tous mes contacts à portée de main : téléphone, email, site, réseaux… Tout est là, en un geste.</p>
+                            <p>C'est une carte de visite moderne, pratique et durable. Plus besoin de papier, ni de chercher mes coordonnées !</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
