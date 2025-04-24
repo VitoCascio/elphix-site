@@ -46,15 +46,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Mode paysage
                 orientationMessage.classList.remove('visible');
                 orientationMessage.classList.add('hidden');
-                
-                // Délai pour laisser le temps à l'écran de se stabiliser
+
                 setTimeout(() => {
                     if (!landing.classList.contains('hidden')) {
                         landing.style.display = 'flex';
-                    }
-                    if (!mainContent.classList.contains('hidden')) {
+                    } else {
                         mainContent.style.display = 'block';
-                        // Forcer le réaffichage de la section active
+                        
                         if (currentSection) {
                             const activeSection = document.getElementById(currentSection);
                             if (activeSection) {
@@ -64,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             }
                         }
                     }
-                    // Forcer un recalcul du scale
+
                     requestAnimationFrame(updateScale);
                 }, 100);
             }
@@ -124,6 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
             fullscreenButton.classList.add('hidden');
 
             // Réafficher l'intro avec animation
+            landing.classList.remove('hidden'); // Ajout de cette ligne
             landing.style.display = 'flex';
             requestAnimationFrame(() => {
                 landing.style.opacity = '1';
@@ -190,6 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             // Cacher complètement l'intro
             landing.style.display = 'none';
+            landing.classList.add('hidden'); // Ajout de cette ligne
             
             // Afficher le menu et le contenu
             sideMenu.classList.remove('hidden');
@@ -363,5 +363,37 @@ END:VCARD`;
                 });
             }
         }
+    });
+
+    // Fonction pour forcer le réaffichage des slides
+    function forceSlideRepaint() {
+        // S'assurer que le main-content est affiché
+        if (!landing.classList.contains('hidden')) {
+            landing.style.display = 'flex';
+        } else {
+            mainContent.classList.remove('hidden');
+            mainContent.style.display = 'block';
+
+            // Réafficher la section courante
+            if (currentSection) {
+                const activeSection = document.getElementById(currentSection);
+                if (activeSection) {
+                    activeSection.classList.add('active');
+                    activeSection.style.display = 'flex';
+                    activeSection.style.opacity = '1';
+                    activeSection.style.transform = 'translateX(0) scale(1)';
+                }
+            }
+        }
+
+        // Recalcul du scale après transition
+        requestAnimationFrame(updateScale);
+    }
+
+    // Liste des événements à surveiller
+    ['resize', 'orientationchange', 'fullscreenchange'].forEach(event => {
+        window.addEventListener(event, () => {
+            setTimeout(forceSlideRepaint, 200);
+        });
     });
 });

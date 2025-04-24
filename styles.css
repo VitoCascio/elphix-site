@@ -179,7 +179,6 @@ html, body {
     transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     backdrop-filter: blur(10px);
     z-index: 100;
-    box-shadow: 2px 0 20px rgba(0,0,0,0.3);
     clip-path: inset(0 -20px 0 0);
 }
 
@@ -255,8 +254,9 @@ html, body {
 }
 
 .section.active {
-    opacity: 1;
-    transform: translateX(0) scale(1);
+    display: flex !important;
+    opacity: 1 !important;
+    transform: translateX(0) scale(1) !important;
 }
 
 .section h2 {
