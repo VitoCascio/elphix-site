@@ -50,6 +50,12 @@ html, body {
     justify-content: center;
     align-items: center;
     z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+#orientation-message.visible {
+    opacity: 1;
 }
 
 .orientation-content {
@@ -245,6 +251,7 @@ html, body {
     opacity: 0;
     transform: translateX(100%) scale(0.95);
     transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, opacity;
 }
 
 .section.active {
@@ -625,7 +632,7 @@ html, body {
 
 /* Utilitaires */
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 /* Adaptation responsive */
@@ -645,22 +652,21 @@ html, body {
 
 /* Message d'orientation sur mobile */
 @media screen and (orientation: portrait) {
-    body::before {
-        content: "Veuillez tourner l'écran pour une meilleure expérience (mode paysage).";
-        position: fixed;
-        inset: 0;
-        background-color: black;
-        color: white;
-        font-size: 1.5rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 9999;
-        text-align: center;
-        padding: 20px;
+    #orientation-message {
+        display: flex !important;
     }
+}
 
-    .container {
-        display: none;
+@media screen and (orientation: landscape) {
+    #orientation-message {
+        display: none !important;
+    }
+    
+    #main-content {
+        display: block !important;
+    }
+    
+    .section.active {
+        display: flex !important;
     }
 }
