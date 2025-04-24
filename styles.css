@@ -14,70 +14,45 @@
 }
 
 html, body {
-    height: 100vh;
     width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
     overflow: hidden;
-    background-color: var(--bg-dark);
+    background: var(--bg-dark);
     font-family: 'Poppins', sans-serif;
     color: var(--text-light);
 }
 
-#app {
-    height: 100vh;
+.viewport {
+    position: relative;
     width: 100vw;
+    height: 100vh;
+    overflow: hidden;
 }
 
-.container {
-    width: 1440px;
-    height: 900px;
-    transform: scale(var(--scale));
-    transform-origin: center;
+#ebook-wrapper {
     position: absolute;
     top: 50%;
     left: 50%;
-    translate: -50% -50%;
-}
-
-/* Message d'orientation */
-#orientation-message {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--bg-dark);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-#orientation-message.visible {
-    opacity: 1;
-}
-
-.orientation-content {
-    text-align: center;
-    padding: 20px;
-}
-
-.phone-icon {
-    font-size: 48px;
-    margin-bottom: 20px;
-    animation: rotate 2s infinite;
+    transform: translate(-50%, -50%) scale(var(--scale));
+    transform-origin: center center;
+    width: 1440px;
+    height: 900px;
+    overflow: hidden;
 }
 
 /* Page d'accueil */
 #landing {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     background: var(--bg-dark);
-    position: relative;
-    overflow: hidden;
     transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -179,7 +154,6 @@ html, body {
     transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     backdrop-filter: blur(10px);
     z-index: 100;
-    clip-path: inset(0 -20px 0 0);
 }
 
 #side-menu.visible {
@@ -232,10 +206,8 @@ html, body {
 /* Contenu principal */
 #main-content {
     margin-left: 250px;
-    height: 100%;
     position: relative;
     background: var(--bg-dark);
-    overflow: hidden;
 }
 
 .section {
@@ -250,13 +222,12 @@ html, body {
     opacity: 0;
     transform: translateX(100%) scale(0.95);
     transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-    will-change: transform, opacity;
 }
 
 .section.active {
-    display: flex !important;
-    opacity: 1 !important;
-    transform: translateX(0) scale(1) !important;
+    display: flex;
+    opacity: 1;
+    transform: translateX(0) scale(1);
 }
 
 .section h2 {
@@ -269,7 +240,6 @@ html, body {
 
 .section-content {
     flex: 1;
-    overflow: hidden;
     padding-right: 20px;
 }
 
@@ -632,41 +602,5 @@ html, body {
 
 /* Utilitaires */
 .hidden {
-    display: none !important;
-}
-
-/* Adaptation responsive */
-@media (max-width: 768px) {
-    .logo-img {
-        width: 60%;
-    }
-
-    .tagline {
-        font-size: 1.8rem;
-    }
-
-    .lead {
-        font-size: 1rem;
-    }
-}
-
-/* Message d'orientation sur mobile */
-@media screen and (orientation: portrait) {
-    #orientation-message {
-        display: flex !important;
-    }
-}
-
-@media screen and (orientation: landscape) {
-    #orientation-message {
-        display: none !important;
-    }
-    
-    #main-content {
-        display: block !important;
-    }
-    
-    .section.active {
-        display: flex !important;
-    }
+    display: none;
 }

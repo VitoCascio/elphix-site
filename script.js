@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const mainContent = document.getElementById('main-content');
     const enterButton = document.getElementById('enter-button');
     const fullscreenButton = document.getElementById('fullscreen-button');
-    const orientationMessage = document.getElementById('orientation-message');
     const menuItems = document.querySelectorAll('.menu-item');
     let currentSection = null;
 
@@ -14,11 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Fonction de redimensionnement
     function updateScale() {
-        const baseWidth = 1440;
-        const baseHeight = 900;
-        const scaleX = window.innerWidth / baseWidth;
-        const scaleY = window.innerHeight / baseHeight;
-        const scale = Math.min(scaleX, scaleY);
+        const scale = Math.min(window.innerWidth/1440, window.innerHeight/900);
         document.documentElement.style.setProperty('--scale', scale);
     }
 
@@ -26,57 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', () => {
         requestAnimationFrame(updateScale);
     });
+    window.addEventListener('orientationchange', updateScale);
+    window.addEventListener('fullscreenchange', updateScale);
     window.addEventListener('load', updateScale);
-
-    // Détection mobile
-    function isMobileDevice() {
-        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    }
-
-    // Gestion de l'orientation mobile
-    function checkOrientation() {
-        if (isMobileDevice()) {
-            if (window.innerHeight > window.innerWidth) {
-                // Mode portrait
-                orientationMessage.classList.remove('hidden');
-                orientationMessage.classList.add('visible');
-                landing.style.display = 'none';
-                mainContent.style.display = 'none';
-            } else {
-                // Mode paysage
-                orientationMessage.classList.remove('visible');
-                orientationMessage.classList.add('hidden');
-
-                setTimeout(() => {
-                    if (!landing.classList.contains('hidden')) {
-                        landing.style.display = 'flex';
-                    } else {
-                        mainContent.style.display = 'block';
-                        
-                        if (currentSection) {
-                            const activeSection = document.getElementById(currentSection);
-                            if (activeSection) {
-                                activeSection.style.display = 'flex';
-                                activeSection.style.opacity = '1';
-                                activeSection.style.transform = 'translateX(0) scale(1)';
-                            }
-                        }
-                    }
-
-                    requestAnimationFrame(updateScale);
-                }, 100);
-            }
-        }
-    }
-
-    // Écouter les changements d'orientation avec un délai
-    window.addEventListener('resize', () => {
-        requestAnimationFrame(checkOrientation);
-    });
-    window.addEventListener('orientationchange', () => {
-        setTimeout(checkOrientation, 100);
-    });
-    checkOrientation();
 
     // Animation d'entrée du menu
     function animateMenuItems() {
@@ -122,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
             fullscreenButton.classList.add('hidden');
 
             // Réafficher l'intro avec animation
-            landing.classList.remove('hidden'); // Ajout de cette ligne
+            landing.classList.remove('hidden');
             landing.style.display = 'flex';
             requestAnimationFrame(() => {
                 landing.style.opacity = '1';
@@ -189,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             // Cacher complètement l'intro
             landing.style.display = 'none';
-            landing.classList.add('hidden'); // Ajout de cette ligne
+            landing.classList.add('hidden');
             
             // Afficher le menu et le contenu
             sideMenu.classList.remove('hidden');
@@ -363,37 +310,5 @@ END:VCARD`;
                 });
             }
         }
-    });
-
-    // Fonction pour forcer le réaffichage des slides
-    function forceSlideRepaint() {
-        // S'assurer que le main-content est affiché
-        if (!landing.classList.contains('hidden')) {
-            landing.style.display = 'flex';
-        } else {
-            mainContent.classList.remove('hidden');
-            mainContent.style.display = 'block';
-
-            // Réafficher la section courante
-            if (currentSection) {
-                const activeSection = document.getElementById(currentSection);
-                if (activeSection) {
-                    activeSection.classList.add('active');
-                    activeSection.style.display = 'flex';
-                    activeSection.style.opacity = '1';
-                    activeSection.style.transform = 'translateX(0) scale(1)';
-                }
-            }
-        }
-
-        // Recalcul du scale après transition
-        requestAnimationFrame(updateScale);
-    }
-
-    // Liste des événements à surveiller
-    ['resize', 'orientationchange', 'fullscreenchange'].forEach(event => {
-        window.addEventListener(event, () => {
-            setTimeout(forceSlideRepaint, 200);
-        });
     });
 });
